@@ -29,7 +29,12 @@ public class SimpleClientManagerTests {
     public void setUp() throws Exception  {
 		fundManager = new SimpleInvestmentFundManager();
 		fundsList = new ArrayList<InvestmentFund>();
+		clientManager = new SimpleClientManager();
+		
+		client1 = new Client();
+		clientManager.setClient(client1);
 
+		fundManager.setClient(clientManager);
 		invF = new FundsHandler("Santander Global", "Banco Santander", "Riesgo bajo-medio", 20000020, "Santanderrrr");
     	invF1 = new FundsHandler("Herrero Global", "Banco Herrero", "Riesgo medio", 20000020, "Herreroooo");
     	        
@@ -37,55 +42,60 @@ public class SimpleClientManagerTests {
 		investmentFund1 = new InvestmentFund(invF1, 5, 200.27, null, null, 1.5);
 		fundsList.add(investmentFund);
 		fundsList.add(investmentFund1);
+		fundManager.setInvestmentFunds(fundsList);
 		
     }
 
 	@Test
 	public void getEmptyInvestmentFundsTest() {
-		client1 = new Client();
-		assertTrue(client1.getFundsList().isEmpty());
+		assertTrue(client1.getFunds().isEmpty());
 	}
 
 
  
 	@Test
 	public void getInvestmentFundsTest() throws NotEnoughParticipationsException{
-		client1 = new Client();
-		client1.addFundToList(fundManager.buyFundPack(investmentFund, 10));
+		FundsHandler han =(FundsHandler) investmentFund.getId();
+		fundManager.buyPack(han.getFundName(), 10);
 
-		assertEquals(1,client1.getFundsList().size());
-		assertEquals(0, client1.getFundsList().get(0).getProduct().getId().compareTo(fundsList.get(0).getId()));
+		assertEquals(1,client1.getFunds().size());
+		assertEquals(0, client1.getFunds().get(0).getProduct().getId().compareTo(fundsList.get(0).getId()));
 	}
 	
 
 	@Test
 	public void buyFundPackTestOk() throws NotEnoughParticipationsException{
-		client1=new Client();
-		client1.addFundToList(fundManager.buyFundPack(investmentFund, 10));
-		assertEquals(10,client1.getFundsList().get(0).getAmount());
+		FundsHandler han =(FundsHandler) investmentFund.getId();
+		fundManager.buyPack(han.getFundName(), 10);
+
+		assertEquals(10,client1.getFunds().get(0).getAmount());
 
  
 	}
 	
 	@Test
 	public void buyFundPackTestOk2() throws NotEnoughParticipationsException{
-		client1=new Client();
 		int packsToBuy = 3;
 		InvestmentFundPack pack = new InvestmentFundPack(investmentFund1, packsToBuy );
 		client1.addFundToList(pack);
-		client1.addFundToList(fundManager.buyFundPack(investmentFund, 10));
-		assertEquals(10,client1.getFundsList().get(1).getAmount());
-		assertEquals(3, client1.getFundsList().get(0).getAmount() );
-		int difference = investmentFund1.getAmount() - client1.getFundsList().get(0).getAmount();
+		
+		FundsHandler han =(FundsHandler) investmentFund.getId();
+		fundManager.buyPack(han.getFundName(), packsToBuy);
+		
+		assertEquals(2,client1.getFunds().size());
+		
+		assertEquals(3, client1.getFunds().get(0).getAmount() );
+		int difference = investmentFund1.getAmount() - client1.getFunds().get(0).getAmount();
 		assertEquals(2, difference);
-
- 
+		
 	}
+	
 	
 	@Test(expected=NotEnoughParticipationsException.class)
 	public void buyFundPackTestNotOk() throws NotEnoughParticipationsException{
-		client1=new Client();
-		client1.addFundToList(fundManager.buyFundPack(investmentFund1, 10));
+		FundsHandler han =(FundsHandler) investmentFund1.getId();
+		fundManager.buyPack(han.getFundName(), 10);
+
 	}
 
 }

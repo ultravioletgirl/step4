@@ -50,7 +50,7 @@
     </c:forEach>
     <br>    
     <br>
-    <a href="<c:url value="client.htm"/>">Home</a>
+    <a href="<c:url value="client.htm"/>">Volver al inicio</a>
     
    </body>
 </html>

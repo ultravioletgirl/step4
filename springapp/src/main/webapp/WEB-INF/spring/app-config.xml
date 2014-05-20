@@ -22,7 +22,7 @@
        
        <bean id="clientManager" class="es.unileon.springapp.service.SimpleClientManager">
          <property name="client">
-         	<ref bean="client1"/>
+         	<ref bean="generalClient"/>
          </property>
        </bean>
        
@@ -94,7 +94,7 @@
  		   
        </bean>
 
-       <bean id="client1" class="es.unileon.springapp.domain.Client">
+       <bean id="generalClient" class="es.unileon.springapp.domain.Client">
          <property name="funds" >
             <list>
                 <ref bean = "investmentPack"/>
@@ -105,6 +105,7 @@
        <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
          <property name="basename" value="messages"/>
        </bean>
+       
        <!-- Scans the classpath of this application for @Components to deploy as beans -->
        <context:component-scan base-package="es.unileon.springapp.web" />
 

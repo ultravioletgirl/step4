@@ -13,10 +13,18 @@ import es.unileon.springapp.domain.handler.Handler;
 
 public class InvestmentFund extends Buyable implements Serializable{
 
-    private double profitability;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+	private double profitability;
     private FeeStrategy fee, cancellationFee;
 
-    public InvestmentFund(){
+
+
+	public InvestmentFund(){
     	super();
     }
     
@@ -33,12 +41,10 @@ public class InvestmentFund extends Buyable implements Serializable{
         this.profitability = profitability;
     }
 
-    //TO-DO anyadido
     public int getParticipations(){
     	return this.amount;
     }
 
-    //TO-DO anyadido
     public int getPurchasedAmount(){
     	return this.purchasedAmount;
     }
@@ -68,6 +74,14 @@ public class InvestmentFund extends Buyable implements Serializable{
         this.fee = fee;
     }
 
+    public FeeStrategy getCancellationFee() {
+		return cancellationFee;
+	}
+
+	public void setCancellationFee(FeeStrategy cancellationFee) {
+		this.cancellationFee = cancellationFee;
+	}
+	
     /**
      * @return the profitability
      */

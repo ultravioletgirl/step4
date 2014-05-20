@@ -3,7 +3,14 @@ package es.unileon.springapp.domain;
 
 
 public class InvalidBuyableException extends Exception {
-    public InvalidBuyableException(String parameter, String comparison, double value) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+
+	public InvalidBuyableException(String parameter, String comparison, double value) {
         super(parameter + " must be " + comparison + " than " + value);
     }
 }

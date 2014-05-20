@@ -6,7 +6,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,14 +43,14 @@ public class ClientTests {
 	@Test
 	public void emptyClientTest(){
 		client1=new Client();
-        assertTrue(client1.getFundsList().isEmpty());
+        assertTrue(client1.getFunds().isEmpty());
 	}
  
 	@Test
 	public void addFoundTest(){
 		pack1= new InvestmentFundPack(investmentFund, 10);
 		client1 = new Client(pack1);	
-		assertEquals(1, client1.getFundsList().size());
+		assertEquals(1, client1.getFunds().size());
 	}
 	
 	@Test
@@ -66,7 +65,7 @@ public class ClientTests {
 		client1.addFundToList(pack1);
 		client1.addFundToList(pack2);
 		assertEquals(2, fundsPackList.size());
-		assertEquals(2, client1.getFundsList().size());
+		assertEquals(2, client1.getFunds().size());
 	}
 	
 	@Test
@@ -77,7 +76,7 @@ public class ClientTests {
 		fundsPackList.add(pack1);
 		fundsPackList.add(pack2);
 		client1 = new Client(fundsPackList);	
-		assertEquals(2, client1.getFundsList().size());
+		assertEquals(2, client1.getFunds().size());
 	
 	}
 

@@ -1,14 +1,9 @@
 package es.unileon.springapp.service;
 
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory; 
 
-import es.unileon.springapp.domain.InvestmentFund;
-import es.unileon.springapp.domain.InvestmentFundPack;
-import es.unileon.springapp.domain.NotEnoughParticipationsException;
-import es.unileon.springapp.domain.handler.Handler;
 
 public class BuyInvestmentFund {
 	

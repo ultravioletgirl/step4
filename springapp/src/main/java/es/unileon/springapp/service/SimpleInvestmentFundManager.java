@@ -11,9 +11,18 @@ import es.unileon.springapp.domain.handler.FundsHandler;
 
 public class SimpleInvestmentFundManager implements InvestmentFundManager{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Autowired
     private ClientManager client;
     
+	public void setClient(ClientManager client) {
+		this.client = client;
+	}
+
 	private List<InvestmentFund> funds;
 
 	
@@ -41,7 +50,6 @@ public class SimpleInvestmentFundManager implements InvestmentFundManager{
 		        }
 				InvestmentFundPack newPack = new InvestmentFundPack(investment, amount);
 		        investment.setPurchasedAmount(investment.getPurchasedAmount() + amount);
-
 				client.addFund(newPack);
 			}
 		}

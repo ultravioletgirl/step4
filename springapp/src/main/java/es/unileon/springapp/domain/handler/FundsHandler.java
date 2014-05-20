@@ -1,6 +1,6 @@
 package es.unileon.springapp.domain.handler;
 
-import java.util.regex.Pattern;
+//import java.util.regex.Pattern;
 import es.unileon.springapp.domain.handler.MalformedHandlerException;
 
 public class FundsHandler implements Handler {
@@ -20,7 +20,7 @@ public class FundsHandler implements Handler {
 			Integer fundShare, String stockMarket) throws MalformedHandlerException {
 		StringBuilder errors = new StringBuilder();
 
-		Pattern patternTicker = Pattern.compile("[A-Z]");
+		//Pattern patternTicker = Pattern.compile("[A-Z]");
 		// Matcher matcherTicker = patternTicker.matcher(ticker);
 
 		if (!(fundManager.length() >= 10 && fundManager.length() <= 30)) {
