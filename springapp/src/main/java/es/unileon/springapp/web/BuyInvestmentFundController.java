@@ -36,41 +36,35 @@ public class BuyInvestmentFundController {
 	 /** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
     private ClientController client;
+    private BuyInvestmentFund buyF;
     @Autowired
     private InvestmentFundManager investmentFundManager;
     
 
-    @RequestMapping(value="/fundsList.htm")
-    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    	String now = (new Date()).toString();
-        logger.info("Returning hello view with " + now);
-
-        Map<String, Object> myModel = new HashMap<String, Object>();
-        myModel.put("now", now);
-        myModel.put("funds", this.investmentFundManager.getInvestmentFunds());
-
-        return new ModelAndView("fundsList", "model", myModel);
-    }
     
     @RequestMapping(method = RequestMethod.POST)
-    public String onSubmit(@Valid InvestmentFund fund, BuyInvestmentFund buy, BindingResult result) throws NotEnoughParticipationsException
+    public String onSubmit(@Valid String fundName, BuyInvestmentFund buy, BindingResult result) throws NotEnoughParticipationsException
     {
-	 if (result.hasErrors()) {
-         return "buy";
-     }
-		
-     int numberOfPacks = buy.getPacks();
-     logger.info("Buying packs " + numberOfPacks+".");
+		 if (result.hasErrors()) {
+	         return "buy";
+	     }
+		 buyF = new BuyInvestmentFund();
+	     int numberOfPacks = buy.getPacks();
+	     logger.info("Buying packs " + numberOfPacks+".");
+	     
+	     String fin;
+	     try{
+	    	 fin = "redirect:/client.htm";
+	    	 investmentFundManager.buyPack(fundName, numberOfPacks);
+	     }catch(NotEnoughParticipationsException exception){
+	    	fin = "redirect:/error.htm";
+	    	 
+	     }
 
-     BuyInvestmentFund clientManager = new BuyInvestmentFund();
-	 client.onSubmit(fund, buy, result);
+	     return fin;
+    }
 
-     return "redirect:/client.htm";
- }
-
-
+    //TO-DO poner el get
 
 	public void setClientManager(InvestmentFundManager investmentFundManager) {
         this.investmentFundManager = investmentFundManager;

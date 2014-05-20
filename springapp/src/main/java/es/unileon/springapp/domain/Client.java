@@ -27,11 +27,11 @@ public class Client implements Serializable{
 		
 	}
 
-	public List<InvestmentFundPack> getFundsList() {
+	public List<InvestmentFundPack> getFunds() {
 		return funds;
 	}
 
-	public void setFundsList(List<InvestmentFundPack> fundsList) {
+	public void setFunds(List<InvestmentFundPack> fundsList) {
 		this.funds = fundsList;
 	}
 	

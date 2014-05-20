@@ -21,10 +21,8 @@
        </bean>
        
        <bean id="clientManager" class="es.unileon.springapp.service.SimpleClientManager">
-         <property name="funds" >
-            <list>
-                <ref bean = "investmentPack"/>
-            </list>
+         <property name="client">
+         	<ref bean="client1"/>
          </property>
        </bean>
        
@@ -47,7 +45,7 @@
  	   <bean id="id3" class="es.unileon.springapp.domain.handler.FundsHandler">
  		 <constructor-arg name = "fundName" type="java.lang.String" value = "Herrero Globalwr"/>
  		 <constructor-arg name = "fundManager" type="java.lang.String" value = "Banco Herrerower"/>
- 		 <constructor-arg name = "fundType" type="java.lang.String" value = "Riesgo mediweo"/>
+ 		 <constructor-arg name = "fundType" type="java.lang.String" value = "Riesgo medio"/>
  		 <constructor-arg name = "fundShare" type="java.lang.Integer" value = "17024025"/>
  		 <constructor-arg name = "stockMarket" type="java.lang.String" value = "Herrewerroooo"/>
  	   </bean>
@@ -58,7 +56,7 @@
  	   
  	   </bean>
  	   
- 	   <bean id="feeCanc" class="es.unileon.springapp.domain.fee.LinearFee">
+ 	   <bean id="cancellationFee1" class="es.unileon.springapp.domain.fee.LinearFee">
  		  <constructor-arg name = "fee"  value="1.5"/>	  
  	      <constructor-arg name = "minimum"  value="1.5"/>	
  	   </bean>
@@ -66,9 +64,9 @@
        <bean id="investmentFunds1" class="es.unileon.springapp.domain.InvestmentFund">
  		 <constructor-arg name = "id" ref= "id1" />
  		 <constructor-arg name = "amount" value="10"/>
- 		 <constructor-arg name = "totalPrice" value="200"/>
+ 		 <constructor-arg name = "totalPrice" value="130"/>
  		 <constructor-arg name = "fee" ref="fee"/>
- 		 <constructor-arg name = "cancellationFee" ref="feeCanc"/>	
+ 		 <constructor-arg name = "cancellationFee" ref="cancellationFee1"/>	
  		 <constructor-arg name = "profitability" value="1.5"/>	  
  		 
        </bean>
@@ -76,9 +74,9 @@
        <bean id="investmentFunds2" class="es.unileon.springapp.domain.InvestmentFund">
  		 <constructor-arg name = "id" ref= "id2" />
  		 <constructor-arg name = "amount"  value="5"/>
- 		 <constructor-arg name = "totalPrice" value="200"/>
+ 		 <constructor-arg name = "totalPrice" value="100"/>
  		 <constructor-arg name = "fee" ref="fee"/>
- 		 <constructor-arg name = "cancellationFee" ref="feeCanc"/>	
+ 		 <constructor-arg name = "cancellationFee" ref="cancellationFee1"/>	
  		 <constructor-arg name = "profitability"  value="1.5"/>	  
  		 
        </bean>
@@ -96,11 +94,14 @@
  		   
        </bean>
 
-       <!--Hacer el bean para un cliente con o sin paquetes, se tienen que tener aqui un bean del paquete???-->
- 	   <bean id="client" class="es.unileon.springapp.domain.Client">
-         
+       <bean id="client1" class="es.unileon.springapp.domain.Client">
+         <property name="funds" >
+            <list>
+                <ref bean = "investmentPack"/>
+            </list>
+         </property>
        </bean>
-
+       
        <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
          <property name="basename" value="messages"/>
        </bean>

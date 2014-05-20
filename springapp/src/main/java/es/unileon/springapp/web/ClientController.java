@@ -24,20 +24,20 @@ import es.unileon.springapp.domain.Client;
 import es.unileon.springapp.domain.InvestmentFund;
 import es.unileon.springapp.domain.InvestmentFundPack;
 import es.unileon.springapp.domain.NotEnoughParticipationsException;
+import es.unileon.springapp.domain.handler.Handler;
 import es.unileon.springapp.service.BuyInvestmentFund;
 import es.unileon.springapp.service.ClientManager;
 import es.unileon.springapp.service.InvestmentFundManager;
 
 @Controller
-@RequestMapping(value="/client.htm")
 public class ClientController {
 
 	 /** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
-    private Client client;
 
     @Autowired
     private ClientManager clientManager;
+    
 
     @RequestMapping(value="/client.htm")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
@@ -48,36 +48,14 @@ public class ClientController {
 
         Map<String, Object> myModel = new HashMap<String, Object>();
         myModel.put("now", now);
-        myModel.put("client", this.clientManager.getInvestmentFunds());
+        InvestmentFundPack pack = this.clientManager.getInvestmentFunds().get(0);
+        System.out.println(pack.toString());
+        myModel.put("clientFunds", this.clientManager.getInvestmentFunds());
+        
 
         return new ModelAndView("client", "model", myModel);
     }
     
-    
-    
-	@RequestMapping(method = RequestMethod.POST)
-    public String onSubmit(@Valid InvestmentFund fund, BuyInvestmentFund buy, BindingResult result) throws NotEnoughParticipationsException
-    {
-	 if (result.hasErrors()) {
-         return "buy";
-     }
-		
-     int numberOfPacks = buy.getPacks();
-     logger.info("Buying packs " + numberOfPacks+".");
-
-     client = new Client();
-     client.addFundToList(clientManager.buyFundPack(fund, numberOfPacks));
-
-     return "redirect:/client.htm";
- }
-
- @RequestMapping(method = RequestMethod.GET)
- protected  Client formBackingObject(HttpServletRequest request) throws ServletException {
-     Client client = new Client();
-     client.setFundsList(null);
-	 return 	 client;
-
- }
 
  public void setClientManager(ClientManager clientManager) {
      this.clientManager = clientManager;

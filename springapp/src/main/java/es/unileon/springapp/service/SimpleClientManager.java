@@ -2,31 +2,38 @@ package es.unileon.springapp.service;
 
 import java.util.List;
 
+import es.unileon.springapp.domain.Client;
 import es.unileon.springapp.domain.InvestmentFund;
 import es.unileon.springapp.domain.InvestmentFundPack;
 import es.unileon.springapp.domain.NotEnoughParticipationsException;
+import es.unileon.springapp.domain.handler.Handler;
 
 public class SimpleClientManager implements ClientManager {
 
-	private List<InvestmentFundPack> funds;
+	
+	private Client client;
 
-	public List<InvestmentFundPack> getFunds() {
-		return funds;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setFunds(List<InvestmentFundPack> funds) {
-		this.funds = funds;
-	}
-
-	public InvestmentFundPack buyFundPack(InvestmentFund fund, int amount) throws NotEnoughParticipationsException{
-		InvestmentFundPack fundPack = fund.buy(amount);
-		return fundPack;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	public List<InvestmentFundPack> getInvestmentFunds() {
-		return funds;
-
+		return client.getFunds();
 	}
+
+	public void addFund(InvestmentFundPack pack) {
+		client.addFundToList(pack);
+		
+	}
+	
+	
+
+
+	
 	
 	
 

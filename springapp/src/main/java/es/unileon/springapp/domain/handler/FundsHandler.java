@@ -103,7 +103,7 @@ public class FundsHandler implements Handler {
 
 
 	public String toString() {
-		return this.fundName + " by " + this.fundManager + ", " + this.fundType
+		return "Nombre del fondo: " +this.fundName + "            por: " + this.fundManager + ", " + this.fundType
 				+ " is floated on " + this.stockMarket + " with "
 				+ this.fundShare + " shares.\n";
 	}
