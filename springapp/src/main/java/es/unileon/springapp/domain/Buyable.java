@@ -1,6 +1,7 @@
 package es.unileon.springapp.domain;
 
 import es.unileon.springapp.domain.Pack;
+import es.unileon.springapp.domain.fee.FeeStrategy;
 import es.unileon.springapp.domain.handler.*;;
 
 
@@ -12,10 +13,24 @@ public abstract class Buyable {
     protected int purchasedAmount;
     protected double totalPrice;
 
-    public Buyable(){
+    protected  FeeStrategy fee, cancellationFee;
+    
+    public FeeStrategy getFee() {
+		return fee;
+	}
+	public void setFee(FeeStrategy fee) {
+		this.fee = fee;
+	}
+	public FeeStrategy getCancellationFee() {
+		return cancellationFee;
+	}
+	public void setCancellationFee(FeeStrategy cancellationFee) {
+		this.cancellationFee = cancellationFee;
+	}
+	public Buyable(){
     	
     }
-    public Buyable(Handler id, int amount, double totalPrice) throws InvalidBuyableException {
+    public Buyable(Handler id, int amount, double totalPrice,  FeeStrategy fee, FeeStrategy cancellationFee) throws InvalidBuyableException {
         if (totalPrice < 0) {
             throw new InvalidBuyableException("Price", "greater", 0);
         }
@@ -28,6 +43,9 @@ public abstract class Buyable {
         this.amount = amount;
         this.totalPrice = totalPrice;
         this.purchasedAmount = 0;
+        this.fee = fee;
+        this.cancellationFee = cancellationFee;
+        
     }
     public Handler getId() {
 		return id;

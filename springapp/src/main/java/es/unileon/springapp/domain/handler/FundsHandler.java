@@ -103,9 +103,9 @@ public class FundsHandler implements Handler {
 
 
 	public String toString() {
-		return "Nombre del fondo: " +this.fundName + "            por: " + this.fundManager + ", " + this.fundType
-				+ " is floated on " + this.stockMarket + " with "
-				+ this.fundShare + " shares.\n";
+		return this.fundName + "/" + this.fundManager + "/" + this.fundType
+				+ "/" + this.fundShare + "/"
+				+ this.stockMarket;
 	}
 
 	public int compareTo(Handler other) {

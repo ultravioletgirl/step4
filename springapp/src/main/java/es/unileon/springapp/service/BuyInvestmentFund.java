@@ -3,8 +3,9 @@ package es.unileon.springapp.service;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory; 
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class BuyInvestmentFund {
 	
 	/** Logger for this class and subclasses */

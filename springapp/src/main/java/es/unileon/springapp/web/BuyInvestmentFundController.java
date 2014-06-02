@@ -29,10 +29,10 @@ public class BuyInvestmentFundController {
     @Autowired
     private InvestmentFundManager investmentFundManager;
     
-
+    
     
     @RequestMapping(method = RequestMethod.POST)
-    public String onSubmit(@Valid String fundName, BuyInvestmentFund buy, BindingResult result) throws NotEnoughParticipationsException
+    public String onSubmit(@Valid  BuyInvestmentFund buy, BindingResult result) throws NotEnoughParticipationsException
     {
 		 if (result.hasErrors()) {
 	         return "buy";
@@ -44,7 +44,7 @@ public class BuyInvestmentFundController {
 	     String fin;
 	     try{
 	    	 fin = "redirect:/client.htm";
-	    	 investmentFundManager.buyPack(buy.getFundName(), numberOfPacks);
+	    	 investmentFundManager.buyPack(buy.getFundName(), numberOfPacks, "71463171D");
 	     }catch(NotEnoughParticipationsException exception){
 	    	fin = "redirect:/error.htm";
 	    	 

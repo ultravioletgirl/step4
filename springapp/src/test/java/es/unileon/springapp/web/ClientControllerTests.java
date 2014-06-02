@@ -23,7 +23,8 @@ public class ClientControllerTests {
     	
         ClientController controller = new ClientController();
         
-        Client client = new Client();
+        String id = "71463171D";
+        Client client = new Client(id);
         
         SimpleClientManager clientManager = new SimpleClientManager();
         

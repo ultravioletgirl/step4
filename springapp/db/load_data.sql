@@ -1,0 +1,5 @@
+INSERT INTO `springapp`.`client` (`idClient`) VALUES ('71463171D');
+INSERT INTO `springapp`.`investmentfund` (`idInvestmentFund`, `IF_Amount`, `IF_TotalPrice`, `IF_fee`, `IF_cancellationFee`, `IF_profitability`, `IF_PurchasedAmount`) VALUES ('Santander Global/Banco Santander/Riesgo bajo-medio/10391026/Santanderrrr', '10', '130', '1.5/1.5', '1.5/1.5', '1.5', '0');
+INSERT INTO `springapp`.`investmentfund` (`idInvestmentFund`, `IF_Amount`, `IF_TotalPrice`, `IF_fee`, `IF_cancellationFee`, `IF_profitability`, `IF_PurchasedAmount`) VALUES ('Herrero Global/Banco Herrero/Riesgo medio/17024025/Herreroooo', '5', '200', '1.5/1.5', '1.5/1.5', '1.5', '0');
+INSERT INTO `springapp`.`investmentfundpack` (`idInvestmentFundPack`, `amountDB`, `idClient`) VALUES ('Herrero Globalwr/Banco Herrerower/Riesgo medio/17024025/Herrewerroooo/ /10/ /200/ /1.5/1.5/ /1.5/1.5/ /1.5/ /0', '6', '71463171D');
+INSERT INTO `springapp`.`investmentfundpack` (`idInvestmentFundPack`, `amountDB`, `idClient`) VALUES ('jskdhksdf Globalwr/Banco Herrerower/Riesgo medio/17024022/Herrejdkhfsk/ /10/ /200/ /1.5/1.5/ /1.5/1.5/ /1.5/ /0', '20', '71463171D');

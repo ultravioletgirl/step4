@@ -17,7 +17,9 @@ public class LinearFee implements FeeStrategy {
      */
     private double minimum;
 
-
+    public LinearFee(){
+    	
+    }
 
 
 	public LinearFee(double fee, double minimum) throws InvalidFeeException {
@@ -53,5 +55,9 @@ public class LinearFee implements FeeStrategy {
 
 	public void setMinimum(double minimum) {
 			this.minimum= minimum;
+	}
+	
+	public String toString(){
+		return this.fee +"/"+this.minimum;
 	}
 }

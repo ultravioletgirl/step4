@@ -7,16 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import es.unileon.springapp.domain.InvestmentFund;
 import es.unileon.springapp.domain.NotEnoughParticipationsException;
+import es.unileon.springapp.repository.InvestmentFundDao;
+import es.unileon.springapp.repository.InvestmentFundPackDao;
 
 public interface InvestmentFundManager extends Serializable {
 
     //public InvestmentFundPack buyFundPack(InvestmentFund fund,int amount) throws NotEnoughParticipationsException ;
     
-    public List<InvestmentFund> getInvestmentFunds();
-    
-    public void setInvestmentFunds(List<InvestmentFund> fund);
-	@Autowired
-	public void buyPack(String id, int amount) throws NotEnoughParticipationsException;
+	public void setInvestmentFundDao(InvestmentFundDao investmentFundDao);
+	
+	public void setInvestmentFundPackDao(InvestmentFundPackDao investmentFundPackDao);
+	
+	List<InvestmentFund> getInvestmentFunds();
+
+	public void buyPack(String id, int amount, String idClient) throws NotEnoughParticipationsException;
 
 
 }

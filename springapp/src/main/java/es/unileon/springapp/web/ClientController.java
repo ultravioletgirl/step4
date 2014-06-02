@@ -38,7 +38,7 @@ public class ClientController {
 
         Map<String, Object> myModel = new HashMap<String, Object>();
         myModel.put("now", now);
-        myModel.put("clientFunds", this.clientManager.getInvestmentFunds());       
+        myModel.put("clientFunds", this.clientManager.getPacks("71463171D"));       
 
         return new ModelAndView("client", "model", myModel);
     }

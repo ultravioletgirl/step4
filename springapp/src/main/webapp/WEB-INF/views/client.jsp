@@ -21,7 +21,7 @@
 			  <b>Precio de cada paquete </b>
 		      <c:out value="${fun.product.totalPrice}"/> Euros  <br>
 		      <b>Numero de paquetes comprados: </b>
-		      <c:out value="${fun.product.purchasedAmount}"/>  <br><br><br><br>
+		      <c:out value="${fun.product.purchaseAmount}"/>  <br><br><br><br>
 	    </c:forEach>
 	<a href="<c:url value="fundsList.htm"/>">Contratar fondo</a>
 	    

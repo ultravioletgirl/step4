@@ -20,11 +20,14 @@ public class ClientTests {
 	private InvestmentFund investmentFund,investmentFund1;
 	private InvestmentFundPack pack1, pack2;
 	private FundsHandler invF, invF1;
+	private String id;
 	//private int countFunds = 2;
 	
 	@Before
     public void setUp() throws Exception  {
 
+		id = "71463171D";
+		
 		fundsList = new ArrayList<InvestmentFund>();
 		fundsPackList = new ArrayList<InvestmentFundPack>();
 
@@ -42,14 +45,14 @@ public class ClientTests {
 
 	@Test
 	public void emptyClientTest(){
-		client1=new Client();
+		client1=new Client(id);
         assertTrue(client1.getFunds().isEmpty());
 	}
  
 	@Test
 	public void addFoundTest(){
 		pack1= new InvestmentFundPack(investmentFund, 10);
-		client1 = new Client(pack1);	
+		client1 = new Client(id,pack1);	
 		assertEquals(1, client1.getFunds().size());
 	}
 	
@@ -60,7 +63,7 @@ public class ClientTests {
 
 		fundsPackList.add(pack1);
 		fundsPackList.add(pack2);
-		client1 = new Client();
+		client1 = new Client(id);
 		
 		client1.addFundToList(pack1);
 		client1.addFundToList(pack2);
@@ -75,7 +78,7 @@ public class ClientTests {
 
 		fundsPackList.add(pack1);
 		fundsPackList.add(pack2);
-		client1 = new Client(fundsPackList);	
+		client1 = new Client(id, fundsPackList);	
 		assertEquals(2, client1.getFunds().size());
 	
 	}

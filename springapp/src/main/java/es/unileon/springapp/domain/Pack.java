@@ -5,10 +5,14 @@ import es.unileon.springapp.domain.Buyable;
 
 public abstract class Pack {
 
-    protected final Buyable product;
+    private Buyable product;
 
-    protected int amount;
+    private int amount;
 
+    public Pack(){
+    	
+    }
+    
     public Pack(Buyable product, int amount) {
         this.product = product;
         this.amount = amount;
@@ -17,7 +21,7 @@ public abstract class Pack {
     /**
      * @return the amount
      */
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
@@ -27,6 +31,10 @@ public abstract class Pack {
      */
     public Buyable getProduct() {
         return product;
+    }
+    
+    public void setProduct(Buyable product) {
+        this.product = product;
     }
     
     /**
