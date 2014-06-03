@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import es.unileon.springapp.domain.Client;
-import es.unileon.springapp.domain.InvestmentFund;
 import es.unileon.springapp.domain.InvestmentFundPack;
 import es.unileon.springapp.repository.ClientDao;
 
@@ -32,11 +31,13 @@ public class SimpleClientManager implements ClientManager {
 
 	public List<InvestmentFundPack> getPacks(String id) {
 		List<InvestmentFundPack> funds = clientDao.getPacks(id);
-
-		for(int i =0; i<funds.size();i++){
-			InvestmentFundPack fund = funds.get(i);
-			fund.stringToBuyable();
-			funds.set(i, fund);
+		if(funds != null){
+			for(int i =0; i<funds.size();i++){
+					InvestmentFundPack fund = funds.get(i);
+					fund.stringToBuyable();
+					funds.set(i, fund);
+				
+			}
 		}
 		return funds;
 	}

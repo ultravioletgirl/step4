@@ -48,8 +48,7 @@ public class BuyInvestmentFundController {
 	     }catch(NotEnoughParticipationsException exception){
 	    	fin = "redirect:/error.htm";
 	    	 
-	     }
-
+	     } 
 	     return fin;
     }
 

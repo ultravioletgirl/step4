@@ -32,7 +32,15 @@ public class SimpleInvestmentFundManager implements InvestmentFundManager{
 	@Autowired
     private ClientDao clientDao;
 
-    public InvestmentFundPackDao getInvestmentFundPackDao() {
+    public ClientDao getClientDao() {
+		return clientDao;
+	}
+
+	public void setClientDao(ClientDao clientDao) {
+		this.clientDao = clientDao;
+	}
+
+	public InvestmentFundPackDao getInvestmentFundPackDao() {
 		return investmentFundPackDao;
 	}
 
@@ -47,14 +55,18 @@ public class SimpleInvestmentFundManager implements InvestmentFundManager{
 
 	public List<InvestmentFund> getInvestmentFunds() {
 		List<InvestmentFund> funds = investmentFundDao.getInvestmentFundList();
-		for(int i =0; i<funds.size();i++){
-			InvestmentFund fund = funds.get(i);
-			fund.stringToFee();
-			fund.stringToFeeCancel();
-			fund.stringToHandler();
-			fund.setTotalPrice(funds.get(i).getTotalPriceDB());
-			fund.setAmount(funds.get(i).getAmountDB());
-			funds.set(i, fund);
+		if(funds != null){
+			for(int i =0; i<funds.size();i++){
+				if(funds.get(i).getId() == null){
+					InvestmentFund fund = funds.get(i);
+					fund.stringToFee();
+					fund.stringToFeeCancel();
+					fund.stringToHandler();
+					fund.setTotalPrice(funds.get(i).getTotalPriceDB());
+					fund.setAmount(funds.get(i).getAmountDB());
+					funds.set(i, fund);
+				}
+			}
 		}
 		return funds;
 	}
@@ -76,22 +88,25 @@ public class SimpleInvestmentFundManager implements InvestmentFundManager{
 		    
 				InvestmentFundPack newPack = new InvestmentFundPack(investment, amount);
 		        investment.setPurchaseAmount(investment.getPurchaseAmount() + amount);
-
-		        Client client = new Client();
-		        client.setId(idClient);
-		        newPack.setClient(client);
-		        newPack.investmentToString(investment);
-		        newPack.setAmountDB(amount);
 		        
-		        investmentFundDao.saveInvestmentFund(investment);
-		        System.out.println("Antes de meterlo a la bbdd"+newPack.getIdInvestmentFundPack());
-		        List<InvestmentFundPack> packs = new ArrayList<InvestmentFundPack>();
-		        packs.add(newPack);
-		        client.setFunds(packs);
-		        clientDao.save(client);
-		        //investmentFundPackDao.saveInvestmentFund(newPack);
+		        
+		        Client client = new Client();
+
+
+			    client.setId(idClient);
+			    newPack.setClient(client);
+			    newPack.investmentToString(investment);
+			    newPack.setAmountDB(amount);
+			        
+			    investmentFundDao.saveInvestmentFund(investment);
+			        
+			    List<InvestmentFundPack> packs = new ArrayList<InvestmentFundPack>();
+			    packs.add(newPack);
+			    client.setFunds(packs);
+			    clientDao.save(client);		        
 			}
 		}
 	}
+	
 
 }

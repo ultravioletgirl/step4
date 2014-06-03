@@ -42,7 +42,7 @@ public class SimpleClientManagerTests {
 	    client1 = new Client(id);
 	    List<Client> list = new ArrayList<Client>();
 	    list.add(client1);
-	    ClientDao clientDao = new InMemoryClientDao(list);         
+	    ClientDao clientDao = new InMemoryClientDao(list,null);         
 	    clientManager.setClientDao(clientDao);
         
 		invF = new FundsHandler("Santander Global", "Banco Santander", "Riesgo bajo-medio", 20000020, "Santanderrrr");
@@ -52,7 +52,11 @@ public class SimpleClientManagerTests {
         investmentFund = new InvestmentFund(invF, 10, 200.27, fee, fee, 1.5);
 		investmentFund1 = new InvestmentFund(invF1, 5, 200.27, fee, fee, 1.5);
 		investmentFund.setPurchaseAmount(0);
-		investmentFund.setPurchaseAmount(0);
+		investmentFund1.setPurchaseAmount(0);
+		investmentFund1.setAmountDB(investmentFund1.getAmount());
+		investmentFund.setAmountDB(investmentFund.getAmount());
+		fundManager.setClientDao(clientDao);
+
 		fundsList.add(investmentFund);
 		fundsList.add(investmentFund1);
 		
@@ -68,7 +72,7 @@ public class SimpleClientManagerTests {
 	@Test
 	public void getEmptyInvestmentFundsTest() {
 		clientManager = new SimpleClientManager();
-    	clientManager.setClientDao(new InMemoryClientDao(null));
+    	clientManager.setClientDao(new InMemoryClientDao(null,null));
 
 		assertNull(clientManager.getClient());
 	}
@@ -77,7 +81,10 @@ public class SimpleClientManagerTests {
 	@Test
 	public void buyFundPackTestOk() throws NotEnoughParticipationsException{
 		FundsHandler han =(FundsHandler) investmentFund.getId();
-		fundManager.buyPack(han.getFundName(), 10, clientManager.getClient().get(0).getId());
+		
+		String id = clientManager.getClient().get(0).getId();
+		String name= han.getFundName();
+		fundManager.buyPack(name, 5, id);
 		assertEquals(clientManager.getClient().get(0).getId(),client1.getId());
 	}
 	

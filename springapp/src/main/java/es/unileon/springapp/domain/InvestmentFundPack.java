@@ -89,11 +89,10 @@ public class InvestmentFundPack extends Pack {
     
     public void investmentToString(InvestmentFund fundP){
     	InvestmentFund fund = fundP;
-    	String fin = ""+fund.getId().toString()+"/ /"+fund.getAmount()+"/ /"+fund.getTotalPrice()+"/ /"+fund.getFeeDB()+"/ /"
+    	String fin = ""+fund.getId().toString()+"/ /"+fund.getAmount()+"/ /"+fund.getTotalPriceDB()+"/ /"+fund.getFeeDB()+"/ /"
     				   +fund.getFeeCancelDB()+"/ /"+fund.getProfitability()+"/ /"+fund.getPurchaseAmount();
   
     	this.idInvestmentFundPack = fin;
-    	//setIdInvestmentFundPack (fin);
         
     }
     
@@ -105,7 +104,6 @@ public class InvestmentFundPack extends Pack {
 		LinearFee cancelFee = new LinearFee();
 
         for (int i = 0; i < dataFund.length; i++) {
-        	System.out.println(i);
         	switch(i) {
 		       	 case 0: 
 		       	     handler.setFundName(dataFund[i]);

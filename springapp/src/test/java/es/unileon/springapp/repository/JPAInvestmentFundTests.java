@@ -10,7 +10,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import es.unileon.springapp.domain.InvestmentFund;
-import es.unileon.springapp.domain.InvestmentFundPack;
 import es.unileon.springapp.domain.fee.LinearFee;
 import es.unileon.springapp.domain.handler.FundsHandler;
 
@@ -42,10 +41,14 @@ public class JPAInvestmentFundTests {
 
     @Test
     public void testSaveProduct() {
-
-	investmentFundDao.saveInvestmentFund(fund);
-    List<InvestmentFund> packs = investmentFundDao.getInvestmentFundList();
-    assertEquals(packs.size(),3, 0);	
+	    fund.setIdInvestmentFund(fund.getId().toString());
+	    fund.setFeeDB(fund.getFee().toString());
+	    fund.setFeeCancelDB(fund.getFee().toString());
+	    fund.setAmountDB(fund.getAmount());
+	    fund.setPurchaseAmount(fund.getPurchasedAmount());
+		investmentFundDao.saveInvestmentFund(fund);
+	    List<InvestmentFund> packs = investmentFundDao.getInvestmentFundList();
+	    assertEquals(packs.size(),3, 0);	
     }
 
 

@@ -3,7 +3,6 @@ package es.unileon.springapp.service;
 import java.io.Serializable;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 import es.unileon.springapp.domain.InvestmentFund;
 import es.unileon.springapp.domain.NotEnoughParticipationsException;

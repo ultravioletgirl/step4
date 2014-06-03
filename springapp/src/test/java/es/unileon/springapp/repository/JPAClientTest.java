@@ -28,24 +28,24 @@ public class JPAClientTest {
     @Test
     public void testGetProductList() {
         List<Client> clients = clientDao.getClients();
-        assertEquals(clients.size(), 1, 0);	
+        assertEquals(1, clients.size());	
         assertEquals("71463171D", clients.get(0).getId());
     }
 
     @Test
     public void testGetPacks() {
         List<InvestmentFundPack>packs = clientDao.getPacks("71463171D");
-        assertEquals(packs.size(), 2, 0);	
-        assertEquals("71463171D", packs.get(0).getId());
+        assertEquals(2, packs.size());	
+        assertEquals("71463171D", packs.get(0).getClient().getId());
     }
     
- /*   @Test
+    @Test
     public void testClient() {
         Client client = new Client("3718");
         clientDao.addClient(client);
 
         List<Client> clients = clientDao.getClients();
-        assertEquals(clients.size(),2, 0);	
+        assertEquals(2, clients.size());	
     }
-*/
+
 }

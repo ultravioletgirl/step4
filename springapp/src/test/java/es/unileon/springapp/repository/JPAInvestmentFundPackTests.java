@@ -5,12 +5,10 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.junit.Test;
 
 import es.unileon.springapp.domain.Client;
 import es.unileon.springapp.domain.InvestmentFund;
@@ -41,37 +39,25 @@ public class JPAInvestmentFundPackTests {
     @Test
     public void testGetInvestmentFundPackList() {
         List<InvestmentFundPack> packs = investmentFundPackDao.getInvestmentFundList();
-        assertEquals(packs.size(), 2, 0);	   
+        assertEquals( 2, packs.size());	   
     }
     
 
     @Test
-    public void testClient() {
+    public void testAdd() {
     	InvestmentFundPack pack = new InvestmentFundPack();
-    	//pack.setIdClient("71463171D");
-    	//pack.setAmountDB(1);
-    	/*pack.investmentToString(investmentFund);
-
-    	investmentFundPackDao.saveInvestmentFund(pack);
-        List<InvestmentFundPack> packs = investmentFundPackDao.getInvestmentFundList();
-        assertEquals(packs.size(),3, 0);*/
-        
+    	
         // Now let us create Department
         Client d1 = new Client();
         d1.setId("71463171D");
 
         // Now let us some employees
         List<InvestmentFundPack> empList = new ArrayList<InvestmentFundPack>();
-        InvestmentFundPack e1 = new InvestmentFundPack();
 
         pack.setClient(d1);
     	pack.setAmountDB(1);
     	pack.investmentToString(investmentFund);
-    	System.out.println(pack.getIdInvestmentFundPack());
         empList.add(pack);
-        System.out.println(pack.getClient().getId());
-        
-        System.out.println(empList.get(0).getAmountDB());
 
         d1.setFunds(empList);
         clientDao.save(d1);

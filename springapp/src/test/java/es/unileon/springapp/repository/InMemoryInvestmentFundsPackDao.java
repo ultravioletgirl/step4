@@ -22,8 +22,7 @@ public class InMemoryInvestmentFundsPackDao implements InvestmentFundPackDao{
 	}
 
 	public List<InvestmentFundPack> getInvestmentFundListWithID(String id) {
-		
-		return null;
+		return this.investmentFundPackList;
 	}
 
     

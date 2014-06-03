@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.unileon.springapp.domain.Client;
 import es.unileon.springapp.domain.InvestmentFundPack;
-import es.unileon.springapp.repository.InvestmentFundPackDao;
+
 
 @Repository(value = "clientDao")
 public class JPAClientDao implements ClientDao{
@@ -22,8 +22,6 @@ public class JPAClientDao implements ClientDao{
      */
     @PersistenceContext
     public void setEntityManager(EntityManager em) {
-    	System.out.println("algo");
-
         this.em = em;
     }
     
@@ -45,8 +43,6 @@ public class JPAClientDao implements ClientDao{
     	//return em.createQuery("select i from InvestmentFundPack i where i.amountDB like :idCliente").setParameter("idCliente", 6).getResultList();
 		//InvestmentFundPackDao dao = new JPAInvestmentFundPackDao();
 		//return dao.getInvestmentFundListWithID(id);
-    	//TODO
-    	//Coger del cliente la tabla del cliente la id buscar
 	}
 
     @Transactional(readOnly = false)

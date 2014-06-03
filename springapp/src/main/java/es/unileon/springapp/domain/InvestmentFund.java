@@ -14,7 +14,6 @@ import es.unileon.springapp.domain.InvalidBuyableException;
 import es.unileon.springapp.domain.NotEnoughParticipationsException;
 import es.unileon.springapp.domain.TotalLowerThanBoughtException;
 import es.unileon.springapp.domain.InvestmentFundPack;
-import es.unileon.springapp.domain.fee.FeeStrategy;
 import es.unileon.springapp.domain.fee.LinearFee;
 import es.unileon.springapp.domain.handler.FundsHandler;
 import es.unileon.springapp.domain.handler.Handler;
@@ -236,4 +235,6 @@ public class InvestmentFund extends Buyable implements Serializable{
         this.setCancellationFee(fee);
 
     }
+    
+    
 }

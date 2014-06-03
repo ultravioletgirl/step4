@@ -15,6 +15,8 @@ import es.unileon.springapp.domain.InvestmentFundPack;
 import es.unileon.springapp.domain.NotEnoughParticipationsException;
 import es.unileon.springapp.domain.fee.LinearFee;
 import es.unileon.springapp.domain.handler.FundsHandler;
+import es.unileon.springapp.repository.ClientDao;
+import es.unileon.springapp.repository.InMemoryClientDao;
 import es.unileon.springapp.repository.InMemoryInvestmentFundsDao;
 import es.unileon.springapp.repository.InMemoryInvestmentFundsPackDao;
 import es.unileon.springapp.repository.InvestmentFundDao;
@@ -31,14 +33,12 @@ public class SimpleInvestmentFundManagerTests {
 	private FundsHandler invF, invF1;
 	private int countFunds = 2;
 	private Client client1;
-	private SimpleClientManager clientManager;
 	
     @Before
     public void setUp() throws Exception {
     	
     	String id = "71463171D";
         client1 = new Client(id);
-        clientManager = new SimpleClientManager();
 
     	invF = new FundsHandler("Santander Global", "Banco Santander", "nosenosenose", 20000020, "Santanderrrr");
     	invF1 = new FundsHandler("Herrero Global", "Banco Herrero", "nosenosenose", 20000020, "Herreroooo");
@@ -46,10 +46,12 @@ public class SimpleInvestmentFundManagerTests {
     	
     	investmentFundManager = new SimpleInvestmentFundManager();
         
-        investmentFund = new InvestmentFund(invF, 10, 200.27, fee, fee, 1.5);
-		investmentFund1 = new InvestmentFund(invF1, 5, 200.27, fee, fee, 1.5);
-		investmentFund.setPurchaseAmount(0);
-		investmentFund1.setPurchaseAmount(0);
+    	investmentFund = new InvestmentFund(invF, 10, 200.27, fee, fee, 1.5);
+ 		investmentFund1 = new InvestmentFund(invF1, 5, 200.27, fee, fee, 1.5);
+ 		investmentFund.setPurchaseAmount(0);
+ 		investmentFund1.setPurchaseAmount(0);
+ 		investmentFund1.setAmountDB(investmentFund1.getAmount());
+ 		investmentFund.setAmountDB(investmentFund.getAmount());
 
 		funds = new ArrayList<InvestmentFund>();
 		
@@ -89,6 +91,15 @@ public class SimpleInvestmentFundManagerTests {
     
 	@Test
 	public void buyFundPackTestOk() throws NotEnoughParticipationsException {
+		ClientManager clientManager = new SimpleClientManager();
+		String id = "71463171D";
+	    client1 = new Client(id);
+	    List<Client> list = new ArrayList<Client>();
+	    list.add(client1);
+	    ClientDao clientDao = new InMemoryClientDao(list,null);         
+	    clientManager.setClientDao(clientDao);
+	    investmentFundManager.setClientDao(clientDao);
+	    
 		List<InvestmentFund> fundsList = investmentFundManager.getInvestmentFunds();
 		han = (FundsHandler) fundsList.get(0).getId();
 		investmentFundManager.buyPack(han.getFundName(), 10, client1.getId());
